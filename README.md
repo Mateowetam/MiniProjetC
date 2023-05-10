@@ -12,3 +12,10 @@ L'objectif de cette application est de pouvoir crypter un message ou bien décry
 | chiffrer | `txt` (chaine de caractère) : le message à crypter<br>`dec` (entier) correspondant à la clé de cryptage | `ch`, la chaine de caractère cryptée  | Aucune exception |
 | dechiffrer | `txt` (chaine de caractère) : le message à décrypter<br>`dec` (entier) correspondant à la clé de décryptage | `ch`, la chaine de caractère décryptée | Aucune exception |
 | affichage | `message` (chaine de caractère) : le message à afficher | Aucune sortie, car l'affichage s'effectue dans la fonction | Aucune exception | 
+
+## Fonctions
+
+### chiffrer
+
+```c
+char *chiffrer(char txt[], int dec);
