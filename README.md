@@ -59,10 +59,51 @@ Dans ces lignes de décalages qu'on trouve dans `chiffrer` et `déchiffrer`, voi
 
 5. `((c - 'A' - dec + 26) % 26) + 'A'` : enfin, on ajoute 'A' au résultat pour décaler les nombres entre 0 et 25 de retour à leurs correspondances de lettres ASCII (0 devient 'A', 1 devient 'B', etc.). Le résultat est une lettre majuscule déchiffrée.
 
-Pour les lettres minuscules, il faut simplement changer le `A` en `a`, et pour le chiffrage, nous effectuons :
+Pour les lettres minuscules, il faut simplement changer le `A` en `a`, et pour le chiffrage, nous effectuons la même chose, mais en décalant vers la droite avec `+ dec` !
+
+### verif
 
 ```c
-ch[i] = ((c - 'A' + dec) % 26) + 'A';
+int verif(char str[]);
 ```
 
-Soit la même chose, mais en décalant vers la droite avec `+ dec` !
+#### Description
+
+La fonction `verif` permet de vérifier si le message ne contient que des caractères .
+
+```c
+for (i = 0; str[i] != '\0'; i++) {
+if (!isalnum(str[i])) {
+    return 0;
+}
+}
+return 1;
+```
+On parcourt tout le message et on retourne 0 à la manière d'un booléen si on ne rencontre pas un caractère alpha-numérique.
+
+### affichage
+
+\```c
+void affichage(char message[]);
+\```
+
+#### Description
+
+La fonction `affichage` permet d'afficher un message à l'utilisateur. Cette fonction est utilisée pour afficher le message chiffré ou déchiffré, ou bien pour signaler une erreur.
+
+```c
+printf("*************************\n");
+if (strlen(message) == 0)
+{
+    printf("Erreur : il y a un caractère spécial incodable\n");
+}
+else
+{
+    printf("Le message : %s\n", message);
+}
+printf("*************************\n");
+```
+
+Dans ce bloc de code, la fonction commence par afficher une ligne de caractères étoiles pour délimiter le début du message. Ensuite, elle vérifie si la longueur du message est égale à zéro. Si c'est le cas, cela signifie qu'il y a eu une erreur dans le processus de chiffrement ou de déchiffrement, probablement parce que le message d'origine contenait un caractère qui ne peut pas être chiffré ou déchiffré (comme un caractère spécial). Dans ce cas, la fonction affiche un message d'erreur.
+
+Si la longueur du message n'est pas zéro, alors le processus de chiffrement ou de déchiffrement a réussi, et la fonction affiche le message. Enfin, la fonction affiche une autre ligne de caractères étoiles pour délimiter la fin du message.
