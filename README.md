@@ -15,86 +15,41 @@ L'objectif de cette application est de pouvoir crypter un message ou bien décry
 
 ## Fonctions
 
-### chiffrer
+### chiffrer et dechiffrer
 
 ```c
 char *chiffrer(char txt[], int dec);
+char *dechiffrer(char txt[], int dec);
 ```
 
 #### Description
 
 La fonction `chiffrer` chiffre le message donné en utilisant le chiffrement César. Le décalage utilisé pour le chiffrement est fourni par le paramètre `dec`.
 
-Extrait de code :
-
-```c
-char *ch = malloc(sizeof(char) * (strlen(txt) + 1));
-int i = 0;
-while (txt[i])
-{
-  char c = txt[i];
-  if (isupper(c)) // Check si c'est une lettre majuscule
-  {
-    ch[i] = ((c - 'A' + dec) % 26) + 'A';
-  }
-  else if (islower(c)) // Check si c'est une lettre minuscule
-  {
-    ch[i] = ((c - 'a' + dec) % 26) + 'a';
-  }
-  else // si c'est autre chose (comme un chiffre)
-  {
-    ch[i] = c;
-  }
-  i++;
-}
-ch[i] = '\0';
-return ch;
-```
-
-### dechiffrer
-
-```c
-char *dechiffrer(char txt[], int dec);
-```
-
-#### Description
-
 La fonction `dechiffrer` déchiffre le message donné qui a été précédemment chiffré avec le chiffrement César. Le décalage utilisé pour le déchiffrement est fourni par le paramètre `dec`.
 
-Extrait de code :
+Leurs structures se ressemblent, donc voici les explications communes à ces deux fonctions :
 
 ```c
 char *ch = malloc(sizeof(char) * (strlen(txt) + 1));
-int i = 0;
-while (txt[i]) // on parcourt tout le message
-{
-  char c = txt[i];
-  if (isupper(c)) // Check si c'est une lettre majuscule
-  {
-    ch[i] = ((c - 'A' - dec + 26) % 26) + 'A';
-  }
-  else if (islower(c)) // Check si c'est une lettre minuscule
-  {
-    ch[i] = ((c - 'a' - dec + 26) % 26) + 'a';
-  }
-  else // si c'est autre chose (comme un chiffre)
-  {
-    ch[i] = c;
-  }
-  i++;
-}
-ch[i] = '\0';
-return ch;
 ```
+Cette ligne de code alloue dynamiquement de la mémoire pour une nouvelle chaîne de caractères `ch` qui sera utilisée pour stocker le message chiffré ou déchiffré.
 
+Ensuite, on parcourt tout le message, caractère par caractère, et on effectue le décalade souhaité.
 
 ```c
 ch[i] = ((c - 'A' - dec + 26) % 26) + 'A';
 ```
 
+| --------- | chiffrer | dechiffrer |
+| --------- | ------------- |  ------------- |
+| Pour les majuscules | ```c ch[i] = ((c - 'A' + dec) % 26) + 'A'; ``` | ```c ch[i] = ((c - 'A' - dec + 26) % 26) + 'A'; ``` |
+| Pour les minuscules | ```c ch[i] = ((c - 'a' + dec) % 26) + 'a'; ``` | ```c ch[i] = ((c - 'a' - dec + 26) % 26) + 'a'; ``` |
+
+
 Dans ces lignes de décalages qu'on trouve dans `chiffrer` et `déchiffrer`, voici les étapes que nous effectuons :
 
-1. `(c - 'A')` : décale le caractère `c` pour qu'il soit compris entre 0 et 25 (dans l'espace des nombres entiers), c'est-à-dire que 'A' devient 0, 'B' devient 1, etc.
+1. `(c - 'A')` : on décale le caractère `c` pour qu'il soit compris entre 0 et 25 (dans l'espace des nombres entiers), c'est-à-dire que 'A' devient 0, 'B' devient 1, etc.
 
 2. `(c - 'A' - dec)` : ici, on soustrait la clé de déchiffrement `dec` au résultat précédent. Cela décale notre lettre chiffrée de `dec` positions vers la gauche dans l'alphabet.
 
