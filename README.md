@@ -66,7 +66,7 @@ Extrait de code :
 ```c
 char *ch = malloc(sizeof(char) * (strlen(txt) + 1));
 int i = 0;
-while (txt[i])
+while (txt[i]) // on parcourt tout le message
 {
   char c = txt[i];
   if (isupper(c)) // Check si c'est une lettre majuscule
@@ -88,4 +88,26 @@ return ch;
 ```
 
 
+```c
+ch[i] = ((c - 'A' - dec + 26) % 26) + 'A';
+```
 
+Dans ces lignes de décalages qu'on trouve dans `chiffrer` et `déchiffrer`, voici les étapes que nous effectuons :
+
+1. `(c - 'A')` : décale le caractère `c` pour qu'il soit compris entre 0 et 25 (dans l'espace des nombres entiers), c'est-à-dire que 'A' devient 0, 'B' devient 1, etc.
+
+2. `(c - 'A' - dec)` : ici, on soustrait la clé de déchiffrement `dec` au résultat précédent. Cela décale notre lettre chiffrée de `dec` positions vers la gauche dans l'alphabet.
+
+3. `(c - 'A' - dec + 26)` : on ajoute 26 pour s'assurer que le résultat précédent est positif. C'est nécessaire parce que le chiffrement César est circulaire (après 'Z', on revient à 'A'), et en C, l'opérateur modulo `%` pourrait sinon donner un résultat négatif.
+
+4. `((c - 'A' - dec + 26) % 26)` : on utilise le modulo `%` pour garantir que le résultat se situe entre 0 et 25.
+
+5. `((c - 'A' - dec + 26) % 26) + 'A'` : enfin, on ajoute 'A' au résultat pour décaler les nombres entre 0 et 25 de retour à leurs correspondances de lettres ASCII (0 devient 'A', 1 devient 'B', etc.). Le résultat est une lettre majuscule déchiffrée.
+
+Pour les lettres minuscules, il faut simplement changer le `A` en `a`, et pour le chiffrage, nous effectuons :
+
+```c
+ch[i] = ((c - 'A' + dec) % 26) + 'A';
+```
+
+Soit la même chose, mais en décalant vers la droite avec `+ dec` !
