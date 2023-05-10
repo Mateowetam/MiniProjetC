@@ -104,6 +104,5 @@ else
 printf("*************************\n");
 ```
 
-Dans ce bloc de code, la fonction commence par afficher une ligne de caractères étoiles pour délimiter le début du message. Ensuite, elle vérifie si la longueur du message est égale à zéro. Si c'est le cas, cela signifie qu'il y a eu une erreur dans le processus de chiffrement ou de déchiffrement, probablement parce que le message d'origine contenait un caractère qui ne peut pas être chiffré ou déchiffré (comme un caractère spécial). Dans ce cas, la fonction affiche un message d'erreur.
-
-Si la longueur du message n'est pas zéro, alors le processus de chiffrement ou de déchiffrement a réussi, et la fonction affiche le message. Enfin, la fonction affiche une autre ligne de caractères étoiles pour délimiter la fin du message.
+La fonction vérifie si la longueur du message est égale à zéro. Si c'est le cas, cela signifie qu'il y a eu une erreur dans le processus de chiffrement ou de déchiffrement, probablement parce que le message d'origine contenait un caractère qui ne peut pas être chiffré ou déchiffré (comme un caractère spécial). Dans ce cas, la fonction affiche un message d'erreur.
+Si la longueur du message n'est pas zéro, alors le processus de chiffrement ou de déchiffrement a réussi, et la fonction affiche le message.
