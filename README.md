@@ -83,9 +83,9 @@ On parcourt tout le message et on retourne 0 à la manière d'un booléen si on 
 
 ### affichage
 
-\```c
+```c
 void affichage(char message[]);
-\```
+```
 
 #### Description
 
