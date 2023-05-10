@@ -17,5 +17,75 @@ L'objectif de cette application est de pouvoir crypter un message ou bien décry
 
 ### chiffrer
 
-```c
+\```c
 char *chiffrer(char txt[], int dec);
+\```
+
+#### Description
+
+La fonction `chiffrer` chiffre le message donné en utilisant le chiffrement César. Le décalage utilisé pour le chiffrement est fourni par le paramètre `dec`.
+
+Extrait de code :
+
+\```c
+char *ch = malloc(sizeof(char) * (strlen(txt) + 1));
+int i = 0;
+while (txt[i])
+{
+  char c = txt[i];
+  if (isupper(c)) // Check si c'est une lettre majuscule
+  {
+    ch[i] = ((c - 'A' + dec) % 26) + 'A';
+  }
+  else if (islower(c)) // Check si c'est une lettre minuscule
+  {
+    ch[i] = ((c - 'a' + dec) % 26) + 'a';
+  }
+  else // si c'est autre chose (comme un chiffre)
+  {
+    ch[i] = c;
+  }
+  i++;
+}
+ch[i] = '\0';
+return ch;
+\```
+
+### dechiffrer
+
+\```c
+char *dechiffrer(char txt[], int dec);
+\```
+
+#### Description
+
+La fonction `dechiffrer` déchiffre le message donné qui a été précédemment chiffré avec le chiffrement César. Le décalage utilisé pour le déchiffrement est fourni par le paramètre `dec`.
+
+Extrait de code :
+
+\```c
+char *ch = malloc(sizeof(char) * (strlen(txt) + 1));
+int i = 0;
+while (txt[i])
+{
+  char c = txt[i];
+  if (isupper(c)) // Check si c'est une lettre majuscule
+  {
+    ch[i] = ((c - 'A' - dec + 26) % 26) + 'A';
+  }
+  else if (islower(c)) // Check si c'est une lettre minuscule
+  {
+    ch[i] = ((c - 'a' - dec + 26) % 26) + 'a';
+  }
+  else // si c'est autre chose (comme un chiffre)
+  {
+    ch[i] = c;
+  }
+  i++;
+}
+ch[i] = '\0';
+return ch;
+\```
+
+
+
