@@ -98,10 +98,6 @@ char *chiffrer(char txt[], int dec)
     {
       ch[i] = ((c - 'a' + dec) % 26) + 'a';
     }
-    else
-    {
-      ch[i] = c;
-    }
     i++;
   }
   ch[i] = '\0';
@@ -123,10 +119,6 @@ char *dechiffrer(char txt[], int dec)
     else if (islower(c))
     {
       ch[i] = ((c - 'a' - dec + 26) % 26) + 'a';
-    }
-    else
-    {
-      ch[i] = c;
     }
     i++;
   }
