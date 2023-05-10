@@ -17,9 +17,9 @@ L'objectif de cette application est de pouvoir crypter un message ou bien décry
 
 ### chiffrer
 
-\```c
+```c
 char *chiffrer(char txt[], int dec);
-\```
+```
 
 #### Description
 
@@ -27,7 +27,7 @@ La fonction `chiffrer` chiffre le message donné en utilisant le chiffrement Cé
 
 Extrait de code :
 
-\```c
+```c
 char *ch = malloc(sizeof(char) * (strlen(txt) + 1));
 int i = 0;
 while (txt[i])
@@ -49,13 +49,13 @@ while (txt[i])
 }
 ch[i] = '\0';
 return ch;
-\```
+```
 
 ### dechiffrer
 
-\```c
+```c
 char *dechiffrer(char txt[], int dec);
-\```
+```
 
 #### Description
 
@@ -63,7 +63,7 @@ La fonction `dechiffrer` déchiffre le message donné qui a été précédemment
 
 Extrait de code :
 
-\```c
+```c
 char *ch = malloc(sizeof(char) * (strlen(txt) + 1));
 int i = 0;
 while (txt[i])
@@ -85,7 +85,7 @@ while (txt[i])
 }
 ch[i] = '\0';
 return ch;
-\```
+```
 
 
 
