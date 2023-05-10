@@ -55,12 +55,12 @@ void main()
   {
     if (menu == 1)
     {
-      resultat = chiffrer(message, 8);
+      resultat = chiffrer(message, cle);
       affichage(message);
     }
     else
     {
-      resultat = dechiffrer(message, 8);
+      resultat = dechiffrer(message, cle);
     }
     affichage(resultat);
 
@@ -68,66 +68,72 @@ void main()
   }
   else {
     printf("Message invalide chacal\n");
+    printf("Le message : %s\n", verif(message));
   }
 }
 
-char *verif(char str[])
-{
+int verif(char str[]) {
   int i;
-  for (i = 0; str[i] != '\0'; i++)
-  {
-    if (!isalnum(str[i]))
-    {
+  for (i = 0; str[i] != '\0'; i++) {
+    if (!isalnum(str[i])) {
       return 0;
     }
   }
+  return 1;
 }
 
 char *chiffrer(char txt[], int dec)
 {
   char *ch = malloc(sizeof(char) * (strlen(txt) + 1));
+  dec = dec % 26;
   int i = 0;
   while (txt[i])
   {
     char c = txt[i];
-    char a;
-    if (c < 'a')
+    if (isupper(c))
     {
-      a = 'A';
+      ch[i] = ((c - 'A' + dec) % 26) + 'A';
+    }
+    else if (islower(c))
+    {
+      ch[i] = ((c - 'a' + dec) % 26) + 'a';
     }
     else
     {
-      a = 'a';
+      ch[i] = c;
     }
-    ch[i] = ((c - a + dec) % 26 + a);
     i++;
   }
-  ch[strlen(txt)] = '\0';
+  ch[i] = '\0';
   return ch;
 }
 
 char *dechiffrer(char txt[], int dec)
 {
   char *ch = malloc(sizeof(char) * (strlen(txt) + 1));
-  char a;
+  dec = dec % 26;
   int i = 0;
   while (txt[i])
   {
     char c = txt[i];
-    if (c < 'a')
+    if (isupper(c))
     {
-      a = 'A';
+      ch[i] = ((c - 'A' - dec + 26) % 26) + 'A';
+    }
+    else if (islower(c))
+    {
+      ch[i] = ((c - 'a' - dec + 26) % 26) + 'a';
     }
     else
     {
-      a = 'a';
+      ch[i] = c;
     }
-    ch[i] = ((c - a - dec + 26) % 26) + a;
     i++;
   }
-  ch[strlen(txt)] = '\0';
+  ch[i] = '\0';
   return ch;
 }
+
 
 void affichage(char message[])
 {
