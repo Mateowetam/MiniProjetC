@@ -49,28 +49,46 @@ void main()
   printf("Quelle est la clé ?\n");
   scanf("%d", &cle);
 
-  char *resultat;
+  // Ouvrir le fichier en mode écriture
+  FILE *fichier = fopen("resultat.txt", "w");
+  if (fichier == NULL) {
+    printf("Erreur d'ouverture du fichier\n");
+    return;
+  }
 
+  char *resultat;
+  
   if (verif(message) != 0)
   {
     if (menu == 1)
     {
+      fprintf(fichier, "Mode : Chiffrage\n");
+      fprintf(fichier, "Message original : %s\n", message);
+      fprintf(fichier, "Clé : %d\n", cle);
       resultat = chiffrer(message, cle);
-      affichage(message);
     }
     else
     {
+      fprintf(fichier, "Mode : Déchiffrage\n");
+      fprintf(fichier, "Message original : %s\n", message);
+      fprintf(fichier, "Clé : %d\n", cle);
       resultat = dechiffrer(message, cle);
     }
+    
+    fprintf(fichier, "Message résultant : %s\n", resultat);
     affichage(resultat);
 
     free(resultat);
   }
   else {
     printf("Message invalide chacal\n");
-    printf("Le message : %s\n", verif(message));
+    fprintf(fichier, "Erreur : Message invalide\n");
   }
+
+  // Fermer le fichier
+  fclose(fichier);
 }
+
 
 int verif(char str[]) {
   int i;
@@ -129,7 +147,6 @@ char *dechiffrer(char txt[], int dec)
 
 void affichage(char message[])
 {
-
   printf("*************************\n");
   if (strlen(message) == 0)
   {

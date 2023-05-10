@@ -1,0 +1,4 @@
+Mode : Déchiffrage
+Message original : LMlmMLmlbagdFqefqdxqPqomxmsq
+Clé : 1312
+Message résultant : ZAzaAZazpourTesterleDecalage
